@@ -1,0 +1,62 @@
+{% extends "base.html" %}
+{% block content %}
+<div class="row">
+  <div class="col-lg-6">
+    <div class="card shadow-sm mb-3">
+      <div class="card-body">
+        <h5 class="card-title mb-2">
+          <i class="bi bi-calendar-check me-2"></i>Today’s History
+        </h5>
+        <p class="small text-muted">Date: {{ today }}</p>
+
+        {% if statuses %}
+          <ul class="list-group">
+            {% for st in statuses %}
+              <li class="list-group-item d-flex justify-content-between align-items-center">
+                <div>
+                  <span class="fw-semibold">{{ st.name }}</span>
+                  <span class="badge bg-light text-muted ms-2">
+                    Needed:
+                    {% if st.needed_label is none %}
+                      Unknown
+                    {% elif st.needed_label %}
+                      Yes
+                    {% else %}
+                      No
+                    {% endif %}
+                  </span>
+                </div>
+                <span class="badge {{ 'bg-success' if st.packed else 'bg-warning text-dark' }}">
+                  {{ "Packed" if st.packed else "Not packed" }}
+                </span>
+              </li>
+            {% endfor %}
+          </ul>
+        {% else %}
+          <p class="text-muted">No history yet for today.</p>
+        {% endif %}
+      </div>
+    </div>
+  </div>
+
+  <div class="col-lg-6">
+    <div class="card shadow-sm">
+      <div class="card-body">
+        <h5 class="card-title mb-2">
+          <i class="bi bi-graph-up-arrow me-2"></i>AI Insights
+        </h5>
+        <p class="small text-muted">
+          The assistant analyses your historical behavior using ML to highlight
+          which items you forget the most and how well the model performs.
+        </p>
+
+        <div id="insights-container">
+          <div class="small text-muted">Loading insights...</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<script src="{{ url_for('static', filename='history.js') }}"></script>
+{% endblock %}

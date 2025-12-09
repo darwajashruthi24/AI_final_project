@@ -1,0 +1,67 @@
+{% extends "base.html" %}
+{% block content %}
+<div class="row">
+  <div class="col-lg-5">
+    <div class="card shadow-sm mb-3">
+      <div class="card-body">
+        <h5 class="card-title mb-3">
+          <i class="bi bi-plus-circle me-2"></i>Add Item
+        </h5>
+        <form method="post" class="row g-2">
+          <div class="col-12">
+            <label class="form-label small mb-1">Item name</label>
+            <input type="text" name="name" class="form-control" placeholder="e.g. ID Card" required />
+          </div>
+          <div class="col-md-6">
+            <label class="form-label small mb-1">Priority</label>
+            <select name="priority" class="form-select">
+              <option value="low">Low</option>
+              <option value="medium" selected>Medium</option>
+              <option value="high">High</option>
+            </select>
+          </div>
+          <div class="col-md-6">
+            <label class="form-label small mb-1">Category</label>
+            <input type="text" name="category" class="form-control" placeholder="e.g. work, gym" />
+          </div>
+          <div class="col-12">
+            <button type="submit" class="btn btn-primary w-100 mt-2">
+              <i class="bi bi-save me-1"></i>Add
+            </button>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+
+  <div class="col-lg-7">
+    <div class="card shadow-sm">
+      <div class="card-body">
+        <h5 class="card-title mb-3">
+          <i class="bi bi-list-ul me-2"></i>My Items
+        </h5>
+        {% if items %}
+          <div class="list-group">
+            {% for it in items %}
+              <div class="list-group-item d-flex justify-content-between align-items-center">
+                <div>
+                  <span class="fw-semibold">{{ it.name }}</span>
+                  <span class="badge bg-secondary ms-1 text-capitalize">{{ it.category }}</span>
+                  <span class="badge bg-light text-muted border ms-1 text-capitalize">
+                    Priority: {{ it.priority }}
+                  </span>
+                </div>
+                <div class="small text-muted">
+                  {{ 'Active' if it.active else 'Inactive' }}
+                </div>
+              </div>
+            {% endfor %}
+          </div>
+        {% else %}
+          <p class="text-muted mb-0">No items yet. Add your first essential item.</p>
+        {% endif %}
+      </div>
+    </div>
+  </div>
+</div>
+{% endblock %}

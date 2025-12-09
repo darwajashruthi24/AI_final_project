@@ -1,0 +1,7 @@
+Flask
+Flask-Login
+SQLAlchemy
+pandas
+scikit-learn
+joblib
+APScheduler

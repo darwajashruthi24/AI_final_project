@@ -1,0 +1,57 @@
+{% extends "base.html" %}
+{% block content %}
+<div class="row mb-3">
+  <div class="col-lg-8">
+    <div class="card shadow-sm">
+      <div class="card-body">
+        <div class="d-flex justify-content-between align-items-center mb-2">
+          <h4 class="mb-0">
+            <i class="bi bi-clipboard-check me-2 text-primary"></i>Today’s Checklist
+          </h4>
+          <span id="context-summary" class="badge bg-secondary-subtle text-secondary-emphasis small"></span>
+        </div>
+        <p class="text-muted mb-3">
+          The assistant predicts which items you’ll need today based on your past routines.
+        </p>
+
+        <div id="checklist-container">
+          <div class="text-muted small">Loading predictions...</div>
+        </div>
+
+        <div class="d-flex mt-3 gap-2">
+          <button id="btn-train" class="btn btn-outline-primary btn-sm">
+            <i class="bi bi-cpu me-1"></i>Train Model
+          </button>
+          <button id="btn-leaving" class="btn btn-success btn-sm">
+            <i class="bi bi-door-open me-1"></i>I’m leaving now
+          </button>
+          <a href="{{ url_for('simulate') }}" class="btn btn-link btn-sm ms-auto">
+            <i class="bi bi-lightning-charge me-1"></i>What-if simulation
+          </a>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="col-lg-4 mt-3 mt-lg-0">
+    <div class="card shadow-sm">
+      <div class="card-body">
+        <h6 class="card-title mb-2">
+          <i class="bi bi-info-circle me-1"></i>Tips
+        </h6>
+        <p class="small text-muted mb-1">
+          • Use “I’m leaving now” daily so the model can learn your routine.
+        </p>
+        <p class="small text-muted mb-1">
+          • Go to <strong>Insights</strong> to see what you forget most often.
+        </p>
+        <p class="small text-muted mb-0">
+          • Use the morning email link to one-click mark everything packed.
+        </p>
+      </div>
+    </div>
+  </div>
+</div>
+
+<script src="{{ url_for('static', filename='dashboard.js') }}"></script>
+{% endblock %}
